@@ -1,0 +1,402 @@
+.status-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: 1px solid white;
+    color: white;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    z-index: 10;
+
+    &.connected {
+        background-color: #28a745;
+    }
+
+    &.disconnected {
+        background-color: #dc3545;
+    }
+
+    &.connecting {
+        background-color: grey;
+    }
+}
+
+.settings-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.settings-btn:hover {
+    background: white;
+    color: black;
+    border-color: white;
+    transform: scale(1.1);
+}
+
+.settings-btn:active {
+    transform: scale(1.2);
+}
+
+#open-settings:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Estilo da Janela Modal (<dialog>) */
+#settings-modal {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    background: #1e1e24;
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 90%;
+}
+
+#settings-modal::backdrop {
+    background: rgba(0, 0, 0, 0.7); /* Fundo escuro desfocado ao abrir */
+}
+
+.modal-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+}
+
+.form-group input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background: #2a2a32;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.modal-actions button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#save-settings-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+#close-modal-btn {
+    background-color: #555;
+    color: white;
+}
+
+/* ----------------------------------------------------------------- */
+
+#timer {
+    display: flex;
+    flex-direction: row;
+    margin: 20px auto 10px auto;
+    width: 40vw;
+    justify-content: space-between;
+}
+
+#timer #minutes {
+    background-color: black;
+    height: 25vh;
+    width: 80%;
+    border: 5px solid white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#minutes p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+    width: 90%;
+    color: rgb(68, 207, 13);
+    font-size: 12vw;
+}
+
+#timer #buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 15%;
+    display: flex;
+}
+
+#timer #buttons #start {
+    background-color: #00e676;
+    color: #000000;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 230, 118, 0.3);
+    display: flex;
+    justify-content: center;
+}
+
+#timer #buttons #start:hover {
+    background-color: #00c853;
+    transform: translateY(-2px); /* Efeito de elevação ao passar o rato */
+    box-shadow: 0 6px 14px rgba(0, 230, 118, 0.5);
+}
+
+#timer #buttons #start:active {
+    transform: translateY(0); /* Efeito de clique */
+}
+
+/* Estilo do botão RESET */
+#timer #buttons #reset {
+    background-color: #ff1744;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 23, 68, 0.3);
+    display: flex;
+    justify-content: center;
+}
+
+#timer #buttons #reset:hover {
+    background-color: #d50000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(255, 23, 68, 0.5);
+}
+
+#timer #buttons #reset:active {
+    transform: translateY(0);
+}
+
+/* ----------------------------------------------------------------- */
+
+#teams {
+    margin: 10px 20px 20px 20px;
+    display: flex;
+    flex-direction: row;
+    height: 65vh;
+    width: 95vw;
+}
+
+#teams .team{
+    width: 50%;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.team-name {
+    color: white;
+    background-color: black;
+    font-size: 5vw;
+    height: 20vh;
+    width: 100%;
+    border: 5px solid white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content:space-evenly;
+    margin: 30px;
+}
+
+.team-info .points{
+    color: yellow;
+    border: 2px solid yellow;
+    border-radius: 10px;
+    width: 30%;
+    height: 95%;
+}
+
+.points section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 15%;
+    font-size: xx-large;
+}
+
+.points div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 85%;
+    font-size: 12vw;
+}
+
+.team-info .fouls{
+    color: red;
+    border: 2px solid red;
+    border-radius: 10px;
+    width: 30%;
+    height: 95%;
+}
+
+.fouls section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 15%;
+    font-size: xx-large;
+}
+
+.fouls div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 85%;
+    font-size: 12vw;
+}
+
+.fouls-btn-decrement, .fouls-btn-increment, .points-btn-decrement, .points-btn-increment {
+    background-color: transparent;
+    border: 1.5px solid currentColor;
+    color: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    padding: 0;
+    line-height: 1;
+}
+
+.fouls-btn-decrement:hover, .fouls-btn-increment:hover {
+    background-color: red;
+    color: #000;
+}
+
+.points-btn-decrement:hover, .points-btn-increment:hover {
+    background-color: yellow;
+    color: #000;
+}
+
+/* Efeito de clique */
+.fouls-btn-decrement:active, .fouls-btn-increment:active, .points-btn-decrement:active, .points-btn-increment:active {
+    transform: scale(1.3);
+}
+
+
+/* ----------------------------------------------------------------- */
+
+
+/* Estilo para a modal de fim de jogo */
+#game-over-modal {
+    background-color: #111111;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    padding: 30px;
+    width: 450px;
+    max-width: 90vw;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+
+    /* Ecrã de fundo escuro e ligeiramente embaciado quando o modal abre */
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(3px);
+    }
+
+    .modal-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+            width: 100%;
+
+            button {
+                background-color: #ffffff;
+                color: #000000;
+                border: none;
+                padding: 10px 30px;
+                font-size: 1rem;
+                font-weight: bold;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background-color 0.2s ease, transform 0.1s ease;
+
+                &:hover {
+                    background-color: #dcdcdc;
+                }
+
+                &:active {
+                    transform: scale(0.98);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,113 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center"> Controlo do placar remoto </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="setOpen(true)" [disabled]="!isSettingsEnabled">
+        <ion-icon name="settings-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <!-- SECÇÃO DO TIMER -->
+  <ion-card class="timer-card">
+    <ion-card-header>
+      <ion-card-subtitle>Tempo de Jogo</ion-card-subtitle>
+      <ion-card-title class="timer-display">{{ formatTime(totalSeconds) }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="timer-buttons">
+        <ion-button color="success" expand="block" (click)="toggleTimer()">{{ startBtnText }}</ion-button>
+        <ion-button expand="block" (click)="resetTimer()">Reiniciar</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- EQUIPA DA CASA -->
+  <ion-card class="team-card">
+    <ion-card-header>
+      <ion-card-title>{{ homeName }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <div class="control-row points-row">
+        <span>Pontos: <strong>{{ homePoints }}</strong></span>
+        <div class="btn-group">
+          <ion-button color="danger" size="small" (click)="decrementPoints('home')">-</ion-button>
+          <ion-button color="primary" size="small" (click)="incrementPoints('home')">+</ion-button>
+        </div>
+      </div>
+      
+      <div class="control-row fouls-row">
+        <span>Faltas: <strong>{{ homeFouls }}</strong></span>
+        <div class="btn-group">
+          <ion-button color="danger" size="small" (click)="decrementFouls('home')">-</ion-button>
+          <ion-button color="primary" size="small" (click)="incrementFouls('home')">+</ion-button>
+        </div>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
+  <!-- EQUIPA DE FORA -->
+  <ion-card class="team-card">
+    <ion-card-header>
+      <ion-card-title>{{ awayName }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <div class="control-row points-row">
+        <span>Pontos: <strong>{{ awayPoints }}</strong></span>
+        <div class="btn-group">
+          <ion-button color="danger" size="small" (click)="decrementPoints('away')">-</ion-button>
+          <ion-button color="primary" size="small" (click)="incrementPoints('away')">+</ion-button>
+        </div>
+      </div>
+      
+      <div class="control-row fouls-row">
+        <span>Faltas: <strong>{{ awayFouls }}</strong></span>
+        <div class="btn-group">
+          <ion-button color="danger" size="small" (click)="decrementFouls('away')">-</ion-button>
+          <ion-button color="primary" size="small" (click)="incrementFouls('away')">+</ion-button>
+        </div>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
+  <!-- MODAL DE DEFINIÇÕES -->
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="dark">
+          <ion-title>Definições do Jogo</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Fechar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding" style="--background: #111;">
+        
+        <ion-item class="custom-input-item">
+          <ion-input label="Nome Equipa Casa" labelPlacement="stacked" [(ngModel)]="tempHomeName"></ion-input>
+        </ion-item>
+
+        <ion-item class="custom-input-item ion-margin-top">
+          <ion-input label="Nome Equipa Fora" labelPlacement="stacked" [(ngModel)]="tempAwayName"></ion-input>
+        </ion-item>
+
+        <ion-item class="custom-input-item ion-margin-top">
+          <ion-input label="Tempo de Jogo (Minutos)" labelPlacement="stacked" type="number" [(ngModel)]="tempGameMinutes"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" color="success" class="ion-margin-top" (click)="saveSettings()">
+          Guardar Alterações
+        </ion-button>
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

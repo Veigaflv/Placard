@@ -1,0 +1,7 @@
+{
+  "name": "remote-controller",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

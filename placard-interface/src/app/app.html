@@ -1,0 +1,107 @@
+<button id="open-settings" class="settings-btn" [disabled]="!isSettingsEnabled" (click)="openSettingsModal(settingsModal)">Definições</button>
+
+<span class="status-badge" 
+      [ngClass]="{
+          'connected': connectionStatus === 'Ligado',
+          'disconnected': connectionStatus === 'Conexão perdida',
+          'connecting': connectionStatus === 'Conectando...'
+      }">
+    {{ connectionStatus }}
+</span>
+
+<div id="timer">
+    <div id="minutes">
+        <p> {{formatTime(totalSeconds)}} </p>
+    </div>
+    <div id="buttons">
+        <button id="start" (click)="toggleTimer()"> {{startBtnText}} </button>
+        <button id="reset" (click)="resetTimer()">Reiniciar</button>
+    </div>
+</div>
+
+<div id="teams">
+    <div class="team">
+        <div class="team-name"> {{homeName}}</div>
+        <div class="team-info">
+            <div class="fouls">
+                <section> 
+                    <button id="home-fouls-dec" class="fouls-btn-decrement" (click)="decrementHomeTeamFouls()">-</button> 
+                    <p>Faltas</p>
+                    <button id="home-fouls-inc" class="fouls-btn-increment" (click)="incrementHomeTeamFouls()">+</button>
+                </section>
+                <div id="home-fouls-value"> {{homeFouls}} </div>
+            </div>
+            <div class="points">
+                <section>
+                    <button id="home-points-dec" class="points-btn-decrement" (click)="decrementHomeTeamPoints()">-</button> 
+                    <p>Pontos</p>
+                    <button id="home-points-inc" class="points-btn-increment" (click)="incrementHomeTeamPoints()">+</button>
+                </section>
+                <div id="home-points-value"> {{homePoints}} </div>
+            </div>
+        </div>
+    </div>
+    <div class="team">
+        <div class="team-name"> {{awayName}} </div>
+        <div class="team-info">
+            <div class="points">
+                <section>
+                    <button id="away-points-dec" class="points-btn-decrement" (click)="decrementAwayTeamPoints()">-</button> 
+                    <p>Pontos</p>
+                    <button id="away-points-inc" class="points-btn-increment" (click)="incrementAwayTeamPoints()">+</button>
+                </section>
+                <div id="away-points-value"> {{awayPoints}} </div>
+            </div>
+            <div class="fouls">
+                <section> 
+                    <button id="away-fouls-dec" class="fouls-btn-decrement" (click)="decrementAwayTeamFouls()">-</button> 
+                    <p>Faltas</p>
+                    <button id="away-fouls-inc" class="fouls-btn-increment" (click)="incrementAwayTeamFouls()">+</button>
+                </section>
+                <div id="away-fouls-value"> {{awayFouls}} </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<dialog id="settings-modal" #settingsModal>
+    <div class="modal-content">
+        <h2>Definições do Placard</h2>
+        
+        <div class="form-group">
+            <label for="input-home-name">Equipa Casa:</label>
+            <input type="text" id="input-home-name" [value]="homeName" #inputHome>
+        </div>
+
+        <div class="form-group">
+            <label for="input-away-name">Equipa Fora:</label>
+            <input type="text" id="input-away-name" [value]="awayName" #inputAway>
+        </div>
+
+        <div class="form-group">
+            <label for="input-game-minutes">Tempo de Jogo (minutos):</label>
+            <input type="number" id="input-game-minutes" [value]="gameMinutes" min="1" max="99" #inputMinutes>
+        </div>
+
+        <div class="modal-actions">
+            <button id="close-modal-btn" type="button" (click)="closeSettingsModal(settingsModal)">Cancelar</button>
+            <button id="save-settings-btn" type="button" (click)="saveSettings(settingsModal, inputHome.value, inputAway.value, inputMinutes.value)">Guardar</button>
+        </div>
+    </div>
+</dialog>
+
+<!-- MODAL DE FIM DE JOGO -->
+<dialog id="game-over-modal" #gameOverModal>
+    <div class="modal-content" style="text-align: center;">
+        <h2>Fim do Jogo!</h2>
+        <p style="font-size: 1.2rem; margin: 20px 0; font-weight: bold;">{{ winnerMessage }}</p>
+        
+        <div style="margin-top: 20px;">
+            <p>Resultado Final: <strong>{{ homeName }} {{ homePoints }} - {{ awayPoints }} {{ awayName }}</strong></p>
+        </div>
+
+        <div class="modal-actions" style="justify-content: center; margin-top: 25px;">
+            <button type="button" (click)="closeGameOverModal(gameOverModal)">Fechar</button>
+        </div>
+    </div>
+</dialog>
